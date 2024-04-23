@@ -319,3 +319,51 @@ Example: A "Username" column in a "Users" table could have a unique key constrai
 A composite key consists of multiple columns that, together, uniquely identify each row in a table.
 It is used when no single column can uniquely identify a row, but the combination of values in multiple columns does.
 Composite keys are often used when representing complex relationships or when a natural key is not available.
+
+#  Mapping Constraints
+
+Mapping constraints, also known as referential integrity constraints, are rules that define and enforce relationships between tables in a relational database. These constraints ensure that data remains consistent and accurate across related tables by enforcing rules about how data can be inserted, updated, or deleted.
+
+1) Primary Key Constraint:
+This constraint ensures that the values in a specific column (or combination of columns) are unique and not null.
+It is used to define the primary key of a table, which uniquely identifies each record in the table.
+Example: In a "Students" table, the "StudentID" column could be defined as the primary key.
+
+2) Foreign Key Constraint:
+This constraint establishes a relationship between two tables by linking a column (or combination of columns) in one table to the primary key column(s) in another table.
+It ensures referential integrity by enforcing that the values in the foreign key column(s) exist in the referenced primary key column(s) of the 
+related table.
+Example: In an "Orders" table, the "CustomerID" column could be a foreign key that references the "CustomerID" primary key column in a "Customers" table.
+
+3) Unique Constraint:
+This constraint ensures that the values in a specific column (or combination of columns) are unique across all records in a table.
+Unlike a primary key constraint, a unique constraint allows null values.
+It is used to enforce uniqueness when there is a requirement for uniqueness but the column(s) are not suitable for defining the primary key.
+Example: A "Username" column in a "Users" table could have a unique constraint to ensure that each username is unique.
+
+4) Check Constraint:
+This constraint defines a condition that must be satisfied for the values in a column.
+It is used to enforce domain integrity by limiting the range of acceptable values for a column.
+Example: In a "Employees" table, a check constraint could ensure that the "Age" column contains values greater than or equal to 18.
+
+# Null Values
+
+A null value represents the absence of a value or an unknown value in a database column.
+Null values are different from zero, empty strings, or spaces; they indicate the absence of any data.
+Null values are allowed in columns even if they have constraints like NOT NULL, which means that a column must have a value. However, a column with a NOT NULL constraint cannot have null values.
+Null values can occur for various reasons, such as missing or incomplete information, optional attributes, or data that hasn't been collected yet.
+When working with null values, it's essential to handle them appropriately to prevent unexpected behavior and ensure data consistency and accuracy.
+Some database operations treat null values differently, so it's crucial to understand how nulls are handled in your database system.
+
+# Domain Constraints
+
+Domain constraints define the permissible values for a column in a database table.
+They specify the data type, format, range, or set of values that a column can contain.
+Domain constraints help enforce data integrity by ensuring that only valid and meaningful data is stored in the database.
+Common types of domain constraints include:
+Data type constraints: Specify the type of data allowed in a column (e.g., integer, string, date).
+Range constraints: Define the allowable range of values for a numeric or date column.
+Format constraints: Specify the format or pattern that data must adhere to (e.g., email addresses, phone numbers).
+Set constraints: Define a list of allowed values for a column (e.g., a column representing a gender field may only allow values like 'M' or 'F').
+Domain constraints are typically enforced using column data types, check constraints, and foreign key constraints.
+
