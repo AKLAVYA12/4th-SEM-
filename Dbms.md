@@ -71,3 +71,94 @@ DCLs are used to control access to the database and manage user permissions.
 They include commands like GRANT and REVOKE for granting and revoking privileges on database objects.
 
 
+# Database Administrator
+
+A Database Administrator (DBA) is a professional responsible for the design, implementation, maintenance, and security of an organization's databases. They play a critical role in ensuring that databases run smoothly, efficiently, and securely to meet the needs of the organization. 
+
+1) Database Design and Planning:
+
+Collaborating with stakeholders to understand business requirements and design database schemas that meet those requirements.
+Choosing appropriate data models, database platforms, and technologies based on the organization's needs and constraints.
+Planning for scalability, performance optimization, and disaster recovery.
+
+2) Database Installation and Configuration:
+Installing and configuring database management systems (DBMS) software on servers or cloud platforms.
+Setting up database instances, configuring parameters, and allocating resources such as memory, CPU, and storage.
+Ensuring proper integration with other systems and applications.
+
+3) Database Security:
+Implementing and maintaining security measures to protect databases from unauthorized access, data breaches, and other security threats.
+Managing user access and permissions, including role-based access control (RBAC), to ensure that users have appropriate privileges.
+Monitoring database activity and auditing logs to detect and respond to security incidents.
+
+4) Data Backup and Recovery:
+Developing and implementing backup and recovery strategies to prevent data loss and ensure business continuity.
+Scheduling and automating regular backups, including full backups, incremental backups, and transaction log backups.
+Testing backup and recovery procedures to verify their effectiveness and reliability.
+
+5) Performance Monitoring and Tuning:
+Monitoring database performance metrics such as CPU usage, memory utilization, disk I/O, and query execution times.
+Identifying performance bottlenecks and tuning database configurations, indexes, and queries to improve efficiency and response times.
+Analyzing and optimizing database schema design and data access patterns.
+
+# Database Users
+
+Database users are individuals or entities who interact with a database system to perform various tasks, such as querying data, updating records, and generating reports. These users can be categorized into different roles based on their responsibilities and permissions within the database environment.
+
+1) End Users:
+
+End users are individuals who directly interact with the database system to retrieve information, input data, or perform transactions.
+They may use front-end applications, such as web interfaces or desktop software, to access and manipulate data stored in the database.
+Examples of end users include employees entering sales orders, customers browsing products on an e-commerce website, or students accessing their 
+grades online.
+
+2) Database Administrators (DBAs):
+
+Database administrators are responsible for managing and maintaining the database system, ensuring its reliability, performance, and security.
+They perform tasks such as database design, installation, configuration, backup and recovery, security management, and performance tuning.
+DBAs may also be responsible for setting up user accounts, defining access controls, and providing technical support to database users.
+
+3) Database Developers:
+
+Database developers are responsible for designing, implementing, and optimizing database schemas, queries, and stored procedures.
+They write SQL queries, create database objects (tables, views, indexes), and develop application code that interacts with the database.
+Database developers work closely with software developers, business analysts, and other stakeholders to ensure that database systems meet 
+
+4) application requirements.
+
+Data Analysts and Report Writers:
+Data analysts and report writers analyze data stored in the database to derive insights, generate reports, and make data-driven decisions.
+They write complex queries, perform data aggregation, visualization, and statistical analysis to extract meaningful information from the database.
+Data analysts may use business intelligence (BI) tools, reporting software, or custom scripts to access and analyze data.
+
+5) System Administrators:
+
+System administrators are responsible for managing the underlying infrastructure and resources that support the database system.
+They oversee server maintenance, network configuration, security updates, and performance monitoring to ensure the reliability and availability of the database environment.
+System administrators may also manage backups, disaster recovery plans, and high-availability solutions to minimize downtime and data loss.
+
+# Three Schema architecture of DBMS
+
+![alt text](dbms-three-schema-architecture.png)
+
+1) Internal Schema
+
+The internal level has an internal schema which describes the physical storage structure of the database.
+The internal schema is also known as a physical schema.
+It uses the physical data model. It is used to define that how the data will be stored in a block.
+The physical level is used to describe complex low-level data structures in detail
+
+2) Conceptual Level
+
+The conceptual schema describes the design of a database at the conceptual level. Conceptual level is also known as logical level.
+The conceptual schema describes the structure of the whole database.
+The conceptual level describes what data are to be stored in the database and also describes what relationship exists among those data.
+In the conceptual level, internal details such as an implementation of the data structure are hidden.
+Programmers and database administrators work at this level.
+
+3) External Level
+
+At the external level, a database contains several schemas that sometimes called as subschema. The subschema is used to describe the different view of the database.
+An external schema is also known as view schema.
+Each view schema describes the database part that a particular user group is interested and hides the remaining database from that user group.
+The view schema describes the end user interaction with database systems.
