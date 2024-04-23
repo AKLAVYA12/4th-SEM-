@@ -162,3 +162,160 @@ At the external level, a database contains several schemas that sometimes called
 An external schema is also known as view schema.
 Each view schema describes the database part that a particular user group is interested and hides the remaining database from that user group.
 The view schema describes the end user interaction with database systems.
+
+# Hierarchical and Network Data Models:
+
+1) Hierarchical Model
+
+In this model, data is organized in a tree-like structure with parent-child relationships. Each parent can have multiple children, but each child has only one parent. IBM's IMS (Information Management System) is an example of a database system that uses the hierarchical model.
+
+2) Network Model
+
+The network model extends the hierarchical model by allowing each child to have multiple parents, creating a more flexible structure. Data is organized into nodes and links, representing entities and relationships between them. The CODASYL (Conference on Data Systems Languages) standard is a well-known example of the network model.
+
+# Data Independence:
+
+Data independence refers to the ability to change the database schema at one level without affecting the schema at other levels.
+
+1) Logical Data Independence: Changes to the conceptual schema (logical schema) do not require changes to the external schema or application programs. Users and applications remain unaffected by modifications to the logical structure of the database.
+
+2) Physical Data Independence: Changes to the internal schema (physical schema) do not require changes to the conceptual schema or external schema. Modifications to the storage structure, indexing, or data representation do not impact the logical or user views of the data.
+
+# Entity-Relationship (ER) Model
+
+The Entity Relational Model is a model for identifying entities to be represented in the database and representation of how those entities are related. The ER data model specifies enterprise schema that represents the overall logical structure of a database graphically. The Entity Relationship Diagram explains the relationship among the entities present in the database. ER models are used to model real-world objects like a person, a car, or a company and the relation between these real-world objects. 
+
+* Symbols Used in ER Model
+
+![alt text](ER.png)
+
+* Components of ER Diagram
+
+![alt text](comp.png)
+
+1) Entity
+
+An Entity may be an object with a physical existence – a particular person, car, house, or employee – or it may be an object with a conceptual existence – a company, a job, or a university course. 
+
+2) Strong Entity
+
+A Strong Entity is a type of entity that has a key Attribute. Strong Entity does not depend on other Entity in the Schema. It has a primary key, that helps in identifying it uniquely, and it is represented by a rectangle. These are called Strong Entity Types.
+
+3) Weak Entity
+
+An Entity type has a key attribute that uniquely identifies each entity in the entity set. But some entity type exists for which key attributes can’t be defined. These are called Weak Entity types. 
+
+
+# User Data Modeling using Entity Relationship Model
+
+Data modeling using the Entity-Relationship (ER) model is a fundamental technique in database design, where data entities, attributes, and relationships are represented graphically to define the structure and organization of a database. Here's an overview of how data modeling is done using the Entity-Relationship model:
+
+1) dentify Entities:
+The first step in data modeling is to identify the main entities (objects or concepts) that need to be represented in the database. Entities typically correspond to real-world objects such as customers, products, orders, employees, etc.
+
+2) Define Attributes:
+For each entity, identify and define the attributes (properties or characteristics) that describe the entity. Attributes provide details about the entities and help differentiate one instance of an entity from another.
+Example attributes for a "Customer" entity might include Name, Address, Email, Phone Number, etc.
+
+3) Establish Relationships:
+Determine the relationships between entities. Relationships represent how entities are related to each other and are typically classified as one-to-one, one-to-many, or many-to-many.
+Use verbs or phrases to describe the nature of the relationships between entities. For example, a customer "places" many orders, implying a one-to-many relationship between the "Customer" and "Order" entities.
+Relationships are depicted graphically using lines connecting the related entities, with cardinality and optionality indicators to specify the nature of the relationship.
+
+4) Refine the Model:
+Refine the model by reviewing and validating the relationships and attributes to ensure they accurately reflect the requirements of the system.
+Normalize the data model to eliminate redundancy and ensure data integrity. This involves breaking down the model into smaller, more manageable entities and resolving any many-to-many relationships through the introduction of junction tables.
+
+5) Create ER Diagrams:
+ER diagrams are graphical representations of the data model, showing entities as rectangles, attributes as ovals, and relationships as lines connecting entities.
+Labels and symbols are used to indicate cardinality (how many instances of one entity are related to another) and optionality (whether a relationship is mandatory or optional).
+ER diagrams provide a visual way to communicate the database design to stakeholders, including developers, designers, and end-users.
+
+# converting  ER Model to relational tables.
+
+Converting an Entity-Relationship (ER) model to relational tables involves translating the entities, attributes, and relationships defined in the ER diagram into a set of normalized tables in a relational database management system (RDBMS). Here's a step-by-step process to convert an ER model to relational tables:
+
+1) Identify Entities and Attributes:
+Review the ER diagram and identify each entity along with its attributes.
+Each entity in the ER model will become a table in the relational database, and each attribute will become a column in the corresponding table.
+
+2) Normalize the Data Model:
+Normalize the data model to eliminate redundancy and ensure data integrity.
+Apply normalization techniques such as First Normal Form (1NF), Second Normal Form (2NF), and Third Normal Form (3NF) to break down the model into smaller, more manageable tables.
+Ensure that each table represents a single entity type and that each attribute is atomic (indivisible) and dependent only on the primary key.
+
+3) Identify Primary Keys:
+Determine the primary key for each table, which uniquely identifies each row in the table.
+Primary keys can be single attributes or composite keys (combination of multiple attributes).
+Ensure that primary keys are unique and not null.
+
+4) Establish Relationships:
+Translate the relationships between entities into foreign key constraints in the relational schema.
+For one-to-one and one-to-many relationships, include the primary key of the parent entity as a foreign key in the child entity's table.
+For many-to-many relationships, create a junction table (also known as an associative table or linking table) to represent the relationship, with foreign keys referencing the participating entities.
+
+5) Define Constraints and Indices:
+Define integrity constraints such as foreign key constraints, unique constraints, and check constraints to enforce data consistency and integrity.
+Define indices on columns frequently used for querying to improve performance.
+
+
+# Relational data model concepts
+
+In the relational data model, data is organized into tables, also known as relations, which consist of rows (tuples) and columns (attributes). This model is based on mathematical set theory and provides a logical and efficient way to represent and manipulate data. Here are some key concepts of the relational data model:
+
+1) Tables (Relations):
+Tables are the basic structures in the relational data model.
+Each table represents a relation, containing rows and columns.
+Rows represent individual records or tuples, while columns represent attributes or fields of the records.
+Tables have unique names and are organized into schemas, which define the structure and properties of the tables.
+
+2) Attributes (Columns):
+Attributes are the characteristics or properties of the entities represented by a table.
+Each column in a table corresponds to a single attribute, with a unique name and data type.
+Examples of attributes include customer ID, name, age, address, etc.
+
+3) Tuples (Rows):
+Tuples are individual records or instances represented by rows in a table.
+Each tuple contains values for each attribute defined in the table.
+Tuples are unordered, meaning that the order of rows in a table is not significant.
+
+4) Keys:
+Keys are attributes or combinations of attributes used to uniquely identify tuples in a table.
+Primary Key: A primary key is a unique identifier for each tuple in a table. It ensures that each record in the table is uniquely identifiable.
+Foreign Key: A foreign key is an attribute or set of attributes in one table that references the primary key in another table. It establishes relationships between tables by enforcing referential integrity.
+
+5) Domain:
+Domain refers to the set of permissible values for each attribute in a table.
+Domain constraints define the data type, range, and format of values that can be stored in each column.
+Common data types include integers, strings, dates, and floating-point numbers.
+
+6) Constraints:
+Constraints are rules or conditions that enforce data integrity and consistency in the database.
+Entity Integrity Constraint: Ensures that each tuple in a table has a unique primary key value and that primary key values are not null.
+Referential Integrity Constraint: Ensures that relationships between tables are maintained. It ensures that foreign key values in one table match primary key values in another table.
+
+# Concept of keys
+
+1) Primary Key:
+A primary key is a unique identifier for each record (tuple) in a table.
+It ensures that each row in the table is uniquely identifiable.
+Primary keys can be composed of one or more columns (composite keys), but the combination of values must be unique for each tuple.
+Primary keys are defined when creating a table and are often implemented using constraints to enforce uniqueness and non-null values.
+Example: In a "Students" table, a column named "StudentID" could serve as the primary key.
+
+2) Foreign Key:
+A foreign key is a column or set of columns in one table that references the primary key in another table.
+It establishes a relationship between the tables, known as a referential integrity constraint.
+Foreign keys enforce data consistency by ensuring that values in the referencing column(s) exist in the referenced table's primary key column(s).
+Example: In a "Orders" table, a column named "CustomerID" might serve as a foreign key that references the "CustomerID" primary key in a "Customers" table.
+
+3) Unique Key:
+A unique key ensures that the values in one or more columns are unique across all rows in a table.
+Unlike a primary key, a unique key can allow null values.
+Unique keys are used to enforce data integrity when there is a requirement for uniqueness but not for the column(s) to be the primary key.
+Example: A "Username" column in a "Users" table could have a unique key constraint to ensure that each username is unique.
+
+4) Composite Key:
+A composite key consists of multiple columns that, together, uniquely identify each row in a table.
+It is used when no single column can uniquely identify a row, but the combination of values in multiple columns does.
+Composite keys are often used when representing complex relationships or when a natural key is not available.
