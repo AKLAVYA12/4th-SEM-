@@ -367,3 +367,62 @@ Format constraints: Specify the format or pattern that data must adhere to (e.g.
 Set constraints: Define a list of allowed values for a column (e.g., a column representing a gender field may only allow values like 'M' or 'F').
 Domain constraints are typically enforced using column data types, check constraints, and foreign key constraints.
 
+# Referential Integrity Constraints
+
+Referential integrity constraints are rules that enforce the relationships between tables in a relational database. These constraints ensure that relationships between tables remain consistent and valid, preventing actions that could compromise the integrity of the data. The primary goal of referential integrity constraints is to maintain data consistency and accuracy across related tables.
+
+1) Primary Key Constraint:
+The primary key constraint ensures that each row in a table is uniquely identified by a primary key.
+It prevents duplicate or null values in the primary key column(s) of a table.
+Primary keys are used to uniquely identify rows in a table and are referenced by foreign keys in related tables.
+
+2) Foreign Key Constraint:
+The foreign key constraint establishes a relationship between two tables by linking a column (or set of columns) in one table to the primary key column(s) in another table.
+It ensures that values in the foreign key column(s) of a child table match values in the primary key column(s) of the parent table.
+Foreign key constraints enforce referential integrity by preventing actions that would violate the defined relationships, such as inserting values that do not exist in the referenced table or deleting rows referenced by foreign keys.
+
+3) Cascade Actions:
+Cascade actions define what should happen to related rows in child tables when a corresponding row in a parent table is updated or deleted.
+
+# Unary Relational Operations
+
+* SELECT:
+
+In relational algebra, the SELECT operation (σ) is used to retrieve rows from a relation (table) that satisfy a specified condition.
+The condition is typically expressed as a logical predicate involving one or more attributes of the relation.
+Example: σ(Age > 18)(Students) retrieves all rows from the "Students" relation where the age is greater than 18.
+
+* PROJECT:
+
+The PROJECT operation (π) is used to select a subset of columns (attributes) from a relation.
+It eliminates duplicate rows from the result.
+Example: π(Name, Age)(Students) selects only the "Name" and "Age" attributes from the "Students" relation, eliminating duplicate rows.
+
+# Binary Relational Operations
+
+* JOIN:
+
+The JOIN operation is used to combine rows from two relations based on a related attribute (or set of attributes).
+Different types of joins include INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL JOIN, each with its own rules for combining rows.
+
+Example (SQL):
+SELECT Orders.OrderID, Customers.CustomerName
+FROM Orders
+INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID;
+This SQL query performs an INNER JOIN between the "Orders" and "Customers" tables based on the "CustomerID" column.
+
+* DIVISION:
+
+The DIVISION operation is less commonly used and represents a more complex operation in relational algebra.
+It is used to find all tuples in one relation that are associated with all tuples in another relation.
+Example: R ÷ S returns all tuples from relation R for which there are matching tuples in S for every tuple in R.
+
+* SQL:
+
+SQL (Structured Query Language) is a standard language for managing relational databases.
+It provides a set of commands for defining, querying, updating, and managing data in relational database systems.
+SQL supports all the relational operations mentioned above, including SELECT, PROJECT, JOIN, and DIVISION, as well as additional operations like INSERT, UPDATE, DELETE, and CREATE.
+
+Example (SQL SELECT statement):
+SELECT * FROM Students WHERE Age > 18;
+This SQL query retrieves all columns from the "Students" table where the age is greater than 18.
