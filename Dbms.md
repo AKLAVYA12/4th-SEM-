@@ -539,3 +539,53 @@ A Transaction Processing System (TPS) is a type of information system that facil
 1) Serializability: Serializability is a property of schedules that ensures that the concurrent execution of transactions produces the same results as if they were executed serially, one after the other. In other words, serializability guarantees that the outcome of concurrent execution is equivalent to some serial execution of the same transactions.
 
 2) Testing for Serializability: Testing for serializability involves analyzing concurrent schedules to determine if they satisfy the serializability property. There are different methods for testing serializability, including the precedence graph method and the conflict-serializability method. These methods examine the interactions between transactions in the schedule to verify if they can be reordered to form a serial schedule without changing the final outcome.
+
+# Serializability of schedules
+
+Serializability is a crucial concept in database systems that ensures the correctness and consistency of concurrent transactions. It refers to the property of a schedule that guarantees that the execution of concurrent transactions produces the same result as if they were executed serially, one after the other. 
+
+There are two main types of serializability:
+
+conflict serializability and view serializability.
+
+1) Conflict Serializability:
+
+* Definition: Conflict serializability focuses on the potential conflicts between transactions with respect to their access to data items. A 
+  schedule is conflict serializable if it can be transformed into an equivalent serial schedule by swapping non-conflicting operations.
+
+* Conflicting Operations: In conflict serializability, two operations conflict if they belong to different transactions and involve the same data  item, where at least one of the operations is a write operation.
+
+* Testing for Conflict Serializability: Conflict serializability can be tested using a precedence graph, where nodes represent transactions and edges represent conflicts between transactions. If the precedence graph is acyclic, the schedule is conflict serializable.
+
+2) View Serializability:
+
+* Definition: View serializability focuses on the consistency of read operations across transactions. A schedule is view serializable if it produces the same result as some serial schedule, considering only read operations (read-only transactions).
+
+* View Equivalence: Two schedules are view equivalent if they produce the same set of values for all data items read by read-only transactions.
+
+* Testing for View Serializability: View serializability can also be tested using a precedence graph, similar to conflict serializability. 
+
+# Recovery from Transaction Failures
+
+1) Transaction Failure: A transaction failure can occur due to various reasons, such as hardware failures, software errors, or system crashes. When a transaction fails, it may leave the database in an inconsistent state, requiring recovery to restore consistency.
+
+2) Logging: Logging is a common technique used for transaction recovery. In logging, every operation performed by a transaction is recorded in a log file before it is applied to the database. This log allows the system to reconstruct the state of the database at the time of failure.
+
+3) Transaction Rollback: If a transaction fails before it completes, the system may need to roll back or undo its changes to maintain consistency. The system uses the information logged during the transaction's execution to identify and reverse the changes made by the failed transaction.
+
+4) Transaction Commit and Undo: For transactions that have completed successfully (committed), their changes are considered durable and permanent. If a failure occurs after a transaction commits, the system does not need to undo its changes. Instead, it ensures that the committed changes are durably stored in the database.
+
+# Deadlock Handling
+
+1) Deadlock: A deadlock occurs when two or more transactions are waiting indefinitely for resources held by each other, preventing any of them from progressing. Deadlocks can lead to system-wide stalls and must be detected and resolved to ensure system availability.
+
+2) Deadlock Detection: Deadlock detection algorithms periodically check for the presence of deadlocks in the system. These algorithms examine the resource allocation graph or wait-for graph to identify cycles, indicating the presence of deadlocks.
+
+# Deadlock Resolution:
+
+1) Deadlock Prevention: Deadlock prevention techniques aim to avoid the conditions that lead to deadlocks, such as by imposing ordering restrictions on resource requests or using timeouts.
+
+2) Deadlock Avoidance: Deadlock avoidance techniques involve dynamically analyzing transaction resource requests to ensure that the system does not enter into a deadlock state.
+
+3) Deadlock Recovery: Deadlock recovery techniques involve breaking the deadlock by aborting one or more transactions involved in the deadlock. The aborted transactions are then rolled back, releasing the resources they held.
+Transaction Abort and Rollback: In deadlock resolution, one or more transactions involved in the deadlock may need to be aborted to break the deadlock. The system rolls back the changes made by these transactions to restore consistency.
