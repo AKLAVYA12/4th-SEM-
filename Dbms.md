@@ -628,3 +628,107 @@ a growing phase and a shrinking phase
 3) Deadlock Avoidance: Two-Phase Locking helps avoid deadlocks by ensuring that transactions acquire all the locks they need before releasing any locks.
 
 4) Deadlock Detection: If deadlocks occur despite deadlock avoidance mechanisms, Two-Phase Locking can employ deadlock detection algorithms to identify and resolve deadlocks.
+
+# Concurrency Control Based on Timestamp Ordering 
+
+Concurrency control based on timestamp ordering is a technique used in database systems to ensure serializability and isolation of transactions by assigning unique timestamps to each transaction and enforcing an order of execution based on these timestamps. 
+
+ * step by step how concurrency control (timestamps) work:
+
+1) Timestamp Assignment:
+Each transaction that enters the system is assigned a unique timestamp. The timestamp can be based on the system clock or generated using a 
+monotonically increasing counter.
+The timestamp represents the start time of the transaction and is used to determine the order of execution.
+
+2) Transaction Execution:
+Transactions are executed based on their timestamps, with older transactions given priority over newer transactions.
+Transactions are scheduled for execution in non-decreasing order of their timestamps. If two transactions have the same timestamp, additional criteria, such as transaction ID, may be used to break ties.
+
+3) Read and Write Operations:
+During execution, transactions may perform read and write operations on data items.
+When a transaction reads a data item, it records the timestamp of the transaction that wrote the last committed value of the data item. This timestamp is used to detect conflicts.
+
+4) Conflict Detection:
+Conflicts between transactions are detected based on their timestamps. A conflict occurs when a newer transaction attempts to read or write a data item that has been modified by an older transaction.
+
+5) Conflict Resolution:
+Conflicts are resolved by either aborting one of the conflicting transactions or delaying the execution of the newer transaction until the older transaction completes.
+Aborted transactions may be rolled back and restarted, while delayed transactions are placed in a queue and executed later.
+
+6) Commitment and Durability:
+Once a transaction completes its execution without conflicts, it commits and its changes become durable and permanent.
+Commitment ensures that the effects of the transaction are visible to other transactions in the system.
+
+# Multiversion Concurrency Control Techniques 
+
+Multiversion Concurrency Control (MVCC) is a concurrency control technique used in database systems to allow concurrent transactions to read consistent snapshots of the database without blocking each other. Unlike locking-based concurrency control, which uses locks to enforce isolation, MVCC maintains multiple versions of data items to provide transaction isolation.
+
+1) Versioning:
+
+Readers Don't Block Writers: MVCC allows concurrent readers to access data items without blocking writers and vice versa.
+Versions of Data Items: MVCC maintains multiple versions of each data item to provide a consistent snapshot of the database for each transaction.
+Timestamp or Sequence Number: Each version of a data item is associated with a timestamp or sequence number representing the time when the version was created.
+
+2) Read Operations:
+
+Read Consistency: When a transaction reads a data item, it retrieves the version of the data item that is valid at the transaction's start time.
+Snapshot Isolation: Transactions see a consistent snapshot of the database at the time they started, even if other transactions modify the data concurrently.
+
+3) Write Operations:
+
+Creation of New Versions: When a transaction updates a data item, it creates a new version of the data item with the updated value and a new timestamp.
+Visibility of Updates: Transactions only see updates that are committed and visible at their start time. Updates that occur after the transaction starts are not visible.
+
+4) Garbage Collection:
+
+Obsolete Versions: As transactions create new versions of data items, older versions become obsolete.
+Garbage Collection: MVCC periodically removes obsolete versions of data items to reclaim storage space.
+
+5) Concurrency Control Mechanisms:
+
+Concurrency Control: MVCC still requires mechanisms to ensure serializability and prevent conflicts between transactions.
+Timestamp Ordering or Conflict Detection: Techniques such as timestamp ordering or conflict detection may be used to manage the concurrency of transactions.
+
+# Validation (Optimistic) Concurrency Control Techniques
+
+Validation, also known as optimistic concurrency control, is a concurrency control technique used in database systems to allow transactions to execute without acquiring locks on data items. Instead of preventing conflicts upfront, as in locking-based concurrency control, optimistic concurrency control defers conflict detection until the time of transaction commit.
+
+1) Execution Phase:
+
+No Locks: During the execution phase, transactions are allowed to read and write data items without acquiring locks.
+Changes Recorded Locally: Transactions record their changes locally without immediately affecting the shared database state.
+Timestamps or Version Numbers: Each transaction is associated with a timestamp or version number representing its start time.
+
+2) Commit Phase:
+
+Validation Check: Before committing, each transaction validates its changes against the current database state to ensure that they do not conflict with changes made by other transactions.
+Read-Write Conflicts: If a transaction's changes conflict with those made by other transactions (e.g., a read-write conflict or a write-write conflict), the transaction is aborted.
+Abort and Retry: Aborted transactions may need to be rolled back and retried later, possibly with a new timestamp.
+
+3) Commitment:
+
+Successful Commit: If validation is successful and no conflicts are detected, the transaction commits, and its changes become permanent and visible to other transactions.
+Atomic Commit: Commitment is typically an atomic operation, ensuring that either all or none of a transaction's changes are applied.
+
+
+# Granularity of Data Items
+
+The granularity of data items refers to the size or scope of the data that is being locked or accessed by transactions in a database system. It determines how finely or coarsely transactions interact with data, affecting concurrency, contention, and performance
+
+1) Fine Granularity: Fine granularity involves locking individual data items, such as rows, records, or even individual fields within a record. Fine-grained locking allows for high concurrency but may result in increased overhead due to the need to manage a large number of locks.
+
+2) Coarse Granularity: Coarse granularity involves locking larger units of data, such as entire tables, partitions, or even entire databases. Coarse-grained locking reduces the overhead associated with managing locks but may lead to increased contention and reduced concurrency, as transactions may need to wait for locks on large portions of data.
+
+# Multiple Granularity Locking:
+
+Multiple granularity locking is a technique used to address these issues by allowing different levels of granularity for locking data items within a database.
+
+1) Hierarchical Locking: Multiple granularity locking allows for a hierarchical structure of locks, where locks at different levels of granularity can be acquired simultaneously. For example, a transaction may acquire a lock on an entire table (coarse granularity) and also on specific rows within that table (fine granularity).
+
+2) Lock Conversion: Transactions can convert locks between different granularities as needed. For example, a transaction holding a coarse lock on a table may need to acquire fine locks on specific rows within that table to perform updates or queries.
+
+3) Reduced Contention: Multiple granularity locking helps reduce contention by allowing transactions to acquire locks at the appropriate level of granularity. This reduces the likelihood of transactions blocking each other unnecessarily.
+
+4) Increased Concurrency: By allowing transactions to acquire locks at different levels of granularity, multiple granularity locking increases concurrency by allowing transactions to access and modify data concurrently at different levels of granularity.
+
+
