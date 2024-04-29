@@ -677,3 +677,198 @@ Characteristics of connectionless communication include:
 * No Flow Control: There are no mechanisms for flow control or congestion avoidance. Senders transmit data at their own pace, which may lead to congestion in the network.
 
 Example protocols: User Datagram Protocol (UDP) is a widely used connectionless protocol, commonly used for real-time applications where low latency is critical, such as voice and video streaming.
+
+# Transmission Control Protocol:  
+
+The Transmission Control Protocol (TCP) is a connection-oriented transport layer protocol in the TCP/IP protocol suite. It provides reliable, ordered, and error-checked delivery of data between applications running on hosts in a network. The TCP segment structure and header format define how data is encapsulated and transmitted over the network.
+
+# TCP Segment structure 
+
+The TCP segment is the unit of data exchange between TCP endpoints (sender and receiver).
+It encapsulates a portion of the data stream to be transmitted, along with control information needed for reliable communicatio
+
+
+# TCP Header Format:
+
+  0                   1                   2                   3
+  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ |          Source Port          |       Destination Port        |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ |                        Sequence Number                        |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ |                    Acknowledgment Number                      |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ |  Data |Rese-|  Control Flags  |                               |
+ | Offset| rved|    (6 bits)     |           Window              |
+ | (4bit)| (6bit)                |                               |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ |          Checksum             |    Urgent Pointer             |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ |                    Options                    |    Padding    |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ |                             Data                              |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+1) Source Port (16 bits): Identifies the sender's port number.
+
+2) Destination Port (16 bits): Identifies the receiver's port number.
+
+3) Sequence Number (32 bits): Specifies the sequence number of the first data byte in the segment.
+
+4) Acknowledgment Number (32 bits): Indicates the next sequence number the sender expects to receive from the receiver.
+
+5) Data Offset (4 bits): Specifies the size of the TCP header in 32-bit words. It indicates where the data begins.
+
+6) Reserved (6 bits): Reserved for future use.
+
+7) Control Flags (6 bits): Various control flags used for managing the TCP connection, such as SYN, ACK, FIN, RST, URG, PSH.
+
+8) Window (16 bits): Specifies the size of the receive window, indicating the amount of data the receiver is willing to accept.
+
+9) Checksum (16 bits): Used for error detection to ensure the integrity of the TCP segment.
+
+10) Urgent Pointer (16 bits): Indicates the end of the urgent data in the segment.
+
+11) Options (variable): Optional field used for additional TCP features or extensions.
+
+12) Padding (variable): Used to ensure that the TCP header ends on a 32-bit boundary.
+
+13) Data (variable): Contains the payload data being transmitted. 
+
+
+# Flow Control ( TCP connection management process )
+
+                 +--------------+
+                 |   Start      |
+                 +------+-------+
+                        |
+                        V
+              +---------+----------+
+              | Connection Initiated|
+              |     (Client)       |
+              +---------+----------+
+                        |
+                        V
+              +---------+----------+
+              |   Send SYN Packet  |
+              |    (Client Sends)  |
+              +---------+----------+
+                        |
+                        V
+           +------------+------------+
+           |   SYN Received, Send   |
+           |  SYN-ACK Packet (Server)|
+           +------------+------------+
+                        |
+                        V
+          +-------------+-------------+
+          |   SYN-ACK Received, Send |
+          |   ACK Packet (Client)    |
+          +-------------+-------------+
+                        |
+                        V
+            +-----------+------------+
+            |   Connection Established|
+            +-----------+------------+
+                        |
+                        V
+            +-----------+------------+
+            |   Send FIN Packet      |
+            |  (Client Initiates)    |
+            +-----------+------------+
+                        |
+                        V
+          +-------------+-------------+
+          |   FIN Received, Send     |
+          |   ACK Packet (Server)    |
+          +-------------+-------------+
+                        |
+                        V
+          +-------------+-------------+
+          |   ACK Received, Send FIN |
+          |  (Server Initiates)      |
+          +-------------+-------------+
+                        |
+                        V
+          +-------------+-------------+
+          |   FIN Received, Send ACK |
+          |  (Client Acknowledges)   |
+          +-------------+-------------+
+                        |
+                        V
+                +------|-------+
+                |   End        |
+                +--------------+
+
+# TCP congestion control
+
+TCP congestion control is a set of algorithms and mechanisms designed to manage and alleviate network congestion, ensuring efficient and fair sharing of network resources among communicating hosts. TCP congestion control operates at the transport layer and is implemented in TCP to prevent network congestion, which can lead to packet loss, increased latency, and degraded network performance.
+
+# Internet Congestion Control Algorithm
+
+Internet congestion control algorithms are used to manage and alleviate network congestion across the Internet, ensuring efficient and fair utilization of network resources while maintaining acceptable levels of performance for end users. These algorithms operate at various layers of the network stack and are implemented in both routers and end-hosts.
+
+1) TCP Congestion Control:
+TCP (Transmission Control Protocol) implements congestion control mechanisms at the transport layer to regulate the sending rate of TCP connections.
+TCP congestion control algorithms, such as TCP Tahoe, TCP Reno, TCP New Reno, and TCP Cubic, adjust the congestion window size based on feedback from the network, such as packet loss, acknowledgments, and ECN (Explicit Congestion Notification) signals.
+These algorithms aim to prevent congestion collapse, ensure fair sharing of network resources, and maintain stable performance across diverse network conditions.
+
+2) Explicit Congestion Notification (ECN):
+ECN is an extension to IP and TCP that allows routers to signal congestion to endpoints without dropping packets.
+ECN-capable routers set a Congestion Experienced (CE) bit in the IP header of packets to indicate congestion.
+TCP endpoints that support ECN respond to ECN signals by reducing their sending rates, similar to how they react to packet loss.
+ECN helps improve network efficiency and fairness by providing early congestion indications to endpoints, reducing the need for packet loss as a congestion signal.
+
+3) Random Early Detection (RED):
+RED is a queue management mechanism used by routers to control congestion by selectively dropping or marking packets before the router's output queue becomes full.
+RED monitors the average queue size and probabilistically drops or marks packets when the queue exceeds a predefined threshold.
+By dropping packets early, RED helps prevent congestion buildup and maintains stable network performance.
+
+4) Weighted Fair Queuing (WFQ):
+WFQ is a scheduling algorithm used in routers to allocate bandwidth fairly among different traffic flows.
+WFQ assigns a weight to each flow based on its priority or quality of service requirements and schedules packets for transmission in a weighted fair manner.
+By prioritizing traffic based on its importance, WFQ helps prevent low-priority traffic from monopolizing network resources and causing congestion.
+
+5) Multipath TCP (MPTCP):
+MPTCP is an extension to TCP that enables simultaneous data transmission over multiple network paths between two hosts.
+MPTCP dynamically distributes traffic across multiple paths based on network conditions, improving throughput and resilience to network failures.
+By utilizing multiple paths, MPTCP helps alleviate congestion on individual links and reduces the likelihood of bottlenecking.
+
+
+# Overview of User Datagram Protocol (UDP)
+
+The User Datagram Protocol (UDP) is a connectionless, unreliable transport layer protocol in the TCP/IP protocol suite. Unlike TCP, UDP does not provide reliable, ordered, or error-checked delivery of data. Instead, it offers a simple and lightweight mechanism for sending datagrams (packets) between applications running on hosts in a network
+
+1) Connectionless Communication:
+
+UDP is connectionless, meaning that no prior communication setup is required between sender and receiver before transmitting data.
+Each UDP datagram is treated independently and routed to its destination based on the destination port number and IP address.
+
+2) Unreliable Delivery:
+UDP does not provide reliability mechanisms such as acknowledgment, retransmission, or error detection/correction.
+Datagram delivery is best-effort, meaning that packets may be lost, duplicated, or delivered out of order without any notification to the sender or receiver.
+
+3) Minimal Overhead:
+UDP has minimal overhead compared to TCP, making it lightweight and efficient for transmitting small, time-sensitive packets.
+Unlike TCP, UDP does not require maintaining connection state information, such as sequence numbers or acknowledgment timers.
+
+4) Datagram Structure:
+Each UDP datagram consists of a header and payload (data) field.
+The UDP header contains a source port number and a destination port number to identify the sending and receiving applications, respectively.
+The UDP header also includes a length field specifying the total length of the UDP datagram (header + data) and a checksum field for optional error detection.
+
+5) Applications:
+UDP is commonly used for real-time applications where low latency and simplicity are more critical than reliability, such as:
+Voice over IP (VoIP) and video conferencing
+Online gaming and streaming media
+Domain Name System (DNS) queries
+Network management protocols (e.g., SNMP)
+
+6) Multicast and Broadcast Support:
+UDP supports both multicast and broadcast communication, allowing a single datagram to be sent to multiple recipients simultaneously.
+Multicast enables efficient one-to-many communication, while broadcast sends a datagram to all hosts within a network segment.
+
+7) No Flow Control or Congestion Control:
+UDP does not implement flow control or congestion control mechanisms to regulate the rate of data transmission.
+Applications using UDP are responsible for managing data flow and handling congestion at higher layers of the protocol stack.
