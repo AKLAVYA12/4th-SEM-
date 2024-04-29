@@ -589,3 +589,42 @@ conflict serializability and view serializability.
 
 3) Deadlock Recovery: Deadlock recovery techniques involve breaking the deadlock by aborting one or more transactions involved in the deadlock. The aborted transactions are then rolled back, releasing the resources they held.
 Transaction Abort and Rollback: In deadlock resolution, one or more transactions involved in the deadlock may need to be aborted to break the deadlock. The system rolls back the changes made by these transactions to restore consistency.
+
+# Concurrency Control 
+
+Concurrency control is a critical aspect of database management systems (DBMS) that ensures the consistency and correctness of data in multi-user environments where multiple transactions may access or modify the same data concurrently. Concurrency control mechanisms prevent data corruption, maintain data integrity, and ensure that transactions execute in a manner that preserves the ACID (Atomicity, Consistency, Isolation, Durability) properties.
+
+# Two-Phase Locking Techniques for Concurrency 
+
+Two-Phase Locking (2PL) is a widely used technique for concurrency control in database systems. It ensures serializability by dividing the execution of transactions into two phases: 
+
+a growing phase and a shrinking phase
+
+1) Growing Phase:
+
+* Lock Acquisition: During the growing phase, a transaction is allowed to acquire locks on data items as needed.
+
+* Strict Protocol: Transactions follow a strict protocol where they can acquire locks but cannot release any locks until they reach a point called the "lock point."
+
+* Shared and Exclusive Locks: Transactions can acquire shared locks (read locks) to read data items and exclusive locks (write locks) to modify data items.
+
+* Lock Upgrade: Transactions may upgrade shared locks to exclusive locks if they need to modify data items they have previously read.
+
+2) Shrinking Phase:
+
+* Lock Release: During the shrinking phase, transactions are allowed to release locks but cannot acquire any new locks.
+
+* Commit or Abort: After releasing all its locks, a transaction decides whether to commit or abort.
+
+* Commit Point: The commit point is the moment when a transaction releases its last lock and decides to commit. Once a transaction commits, its    changes become durable and permanent.
+
+
+# The key properties of Two-Phase Locking include:
+
+1) Consistency: Two-Phase Locking ensures consistency by preventing conflicting operations from executing concurrently.
+
+2) Serializability: Two-Phase Locking ensures serializability by enforcing a strict protocol for lock acquisition and release.
+
+3) Deadlock Avoidance: Two-Phase Locking helps avoid deadlocks by ensuring that transactions acquire all the locks they need before releasing any locks.
+
+4) Deadlock Detection: If deadlocks occur despite deadlock avoidance mechanisms, Two-Phase Locking can employ deadlock detection algorithms to identify and resolve deadlocks.
