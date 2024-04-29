@@ -426,3 +426,116 @@ SQL supports all the relational operations mentioned above, including SELECT, PR
 Example (SQL SELECT statement):
 SELECT * FROM Students WHERE Age > 18;
 This SQL query retrieves all columns from the "Students" table where the age is greater than 18.
+
+
+# Normalization in Design of Databases
+
+Normalization is a database design technique used to organize tables and attributes in a relational database to minimize redundancy and dependency. Functional dependency is a key concept in normalization as it helps identify relationships between attributes in a table
+
+1) First Normal Form (1NF):
+
+The first step in normalization is to ensure that each attribute in a table contains atomic values (i.e., indivisible).
+Functional dependency plays a role in identifying atomic attributes. If an attribute depends on a composite key (combination of attributes), it indicates that the attribute is not atomic.
+Example: In a table representing employee information, the attribute "Address" might be composite, depending on both "Street" and "City" attributes. To achieve 1NF, we'd need to separate the "Address" attribute into its atomic components.
+
+2) Second Normal Form (2NF):
+
+In 2NF, a table must be in 1NF and have no partial dependencies.
+Partial dependency occurs when a non-prime attribute (an attribute not part of the primary key) depends on only part of the primary key.
+Functional dependency helps identify partial dependencies and allows for proper decomposition of tables to eliminate them.
+Example: In a table with composite primary key (EmployeeID, ProjectID) and attributes (EmployeeID, ProjectID, ProjectName, EmployeeName), where ProjectName depends only on ProjectID, we'd need to decompose the table into two separate tables to achieve 2NF.
+
+3) Third Normal Form (3NF):
+
+3NF builds upon 2NF and aims to eliminate transitive dependencies.
+Transitive dependency occurs when a non-prime attribute depends on another non-prime attribute, which itself depends on the primary key.
+Functional dependency helps identify transitive dependencies and guide the decomposition process to achieve 3NF.
+Example: In a table with attributes (StudentID, CourseID, CourseName, ProfessorName), where ProfessorName depends on CourseID, we'd need to decompose the table to separate CourseName and ProfessorName into their own tables to achieve 3NF.
+
+# Different  anomalies  in  designing  a  Database
+
+1) Insertion Anomalies:
+
+Insertion anomalies occur when it's not possible to add data into the database without adding additional, unnecessary information.
+Example: In a table where student details are stored along with their course information, if a student enrolls in a new course, but the course details are not available, it would not be possible to insert the student's data without also inserting the course information.
+
+2) Deletion Anomalies:
+
+Deletion anomalies occur when deleting data from the database leads to unintended loss of other related data.
+Example: In the same table mentioned earlier, if a student withdraws from a course, deleting that record might also result in the unintentional deletion of the course information if no other student is enrolled in that course.
+
+3) Update Anomalies:
+
+Update anomalies occur when updating data in the database results in inconsistent data due to incomplete or partial updates.
+Example: Continuing with the previous example, if the course instructor's name changes, updating it in one place might lead to inconsistencies if the instructor's name is stored in multiple records.
+
+# loss less join decompositions 
+
+Lossless join decomposition is a technique used in database normalization to decompose a relation (table) into multiple smaller relations while preserving the original information without any loss of information. Lossless join decomposition ensures that joining the decomposed relations (tables) will yield the original relation.
+
+# Boyce-Codd Normal Form (BCNF
+
+Boyce-Codd Normal Form (BCNF) is a higher level of normalization in the relational database model, which addresses certain anomalies that may persist even after achieving Third Normal Form (3NF). BCNF is based on the concept of functional dependencies and aims to eliminate redundancy and update anomalies in a database schema.
+
+* Dependency Preservation:
+
+Dependency preservation refers to the property of a decomposition where the functional dependencies of the original relation are preserved in the decomposed relations.
+When decomposing a relation into multiple relations to achieve BCNF, it's crucial to ensure that the resulting relations still preserve all the functional dependencies of the original relation.
+This means that if a functional dependency X→Y existed in the original relation, it should be preserved in at least one of the decomposed relations.
+
+* Achieving BCNF:
+
+To achieve BCNF, you need to identify non-trivial functional dependencies in the original relation where the determinant is not a superkey.
+Once identified, you decompose the original relation into smaller relations such that each relation satisfies BCNF (i.e., each determinant is a superkey).
+During decomposition, you must ensure that the resulting relations preserve all the functional dependencies of the original relation.
+Dependency preservation ensures that the decomposed relations collectively represent the same information as the original relation without losing any functional dependencies.
+
+# multi-valued dependencies 
+
+Multi-valued dependencies (MVDs) are constraints in a relational database that describe relationships between sets of attributes within a table. Specifically, an MVD between sets of attributes X and Y states that for every value of X, there are multiple, unrelated sets of values for Y. This means that the values of Y are independent of each other, given a particular value of X. MVDs are important in higher levels of database normalization, such as Fourth Normal Form (4NF) and Fifth Normal Form (5NF), where they help ensure data integrity and minimize redundancy.
+
+# fourth normal forms
+
+The Fourth Normal Form (4NF) is a level of database normalization that addresses certain types of redundancy that may still exist after achieving Third Normal Form (3NF). It aims to eliminate certain types of multi-valued dependencies (MVDs) that can cause anomalies in the database schema.
+
+Achieving 4NF helps reduce redundancy and improves data integrity in the database schema.
+It minimizes the likelihood of anomalies such as insertion, update, and deletion anomalies.
+
+# Inclusion dependencies, 
+
+Inclusion dependencies (INDs) are constraints in a relational database that describe relationships between columns in different tables. Unlike referential integrity constraints, which specify relationships between tables based on primary and foreign keys, inclusion dependencies specify relationships based on the inclusion of one column's values in another column.
+
+# Transaction processing system
+
+A Transaction Processing System (TPS) is a type of information system that facilitates the collection, processing, storage, and retrieval of transactions occurring within an organization. Transactions, in this context, refer to discrete business activities such as sales, purchases, deposits, withdrawals, and reservations. TPSs are essential for organizations that need to handle a large volume of transactions efficiently and reliably.
+
+1) Rapid Processing: TPSs are designed to process transactions quickly and efficiently to ensure timely updates to the organization's data.
+
+2) High Volume: TPSs can handle a large volume of transactions simultaneously, often involving multiple users and locations.
+
+3) Reliability: TPSs are built to ensure the reliability and integrity of data, even in the event of system failures or interruptions.
+
+4) Atomicity: Transactions in a TPS are typically atomic, meaning they are either fully completed or fully rolled back in case of failure, ensuring data consistency.
+
+5) Concurrency Control: TPSs employ mechanisms to manage concurrent access to shared data, preventing conflicts and ensuring data consistency.
+
+6) Data Integrity: TPSs enforce data integrity constraints to maintain the accuracy and validity of data throughout transaction processing.
+
+
+# TPS (schedule and recoverability)
+
+1) Schedule: In a Transaction Processing System (TPS), a schedule represents the sequence of operations (reads and writes) performed by 
+
+2) transactions. A schedule determines the order in which transactions are executed.
+
+3) Recoverability: In the context of TPS, recoverability refers to the system's ability to restore the database to a consistent state after a 
+
+4) failure. Specifically, it ensures that if a transaction updates a data item, the updates are not lost due to a system failure. Recoverability is typically achieved through techniques like logging and checkpoints.
+
+5) Recoverable Schedule: A schedule is considered recoverable if, for every transaction Tithat reads a data item previously written by another transaction Tj,Tj ​commits before Ti ​does. This ensures that the database can be recovered to a consistent state even if a transaction fails after reading data written by another transaction
+
+# Testing of Serializability:
+
+1) Serializability: Serializability is a property of schedules that ensures that the concurrent execution of transactions produces the same results as if they were executed serially, one after the other. In other words, serializability guarantees that the outcome of concurrent execution is equivalent to some serial execution of the same transactions.
+
+2) Testing for Serializability: Testing for serializability involves analyzing concurrent schedules to determine if they satisfy the serializability property. There are different methods for testing serializability, including the precedence graph method and the conflict-serializability method. These methods examine the interactions between transactions in the schedule to verify if they can be reordered to form a serial schedule without changing the final outcome.
