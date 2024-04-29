@@ -623,3 +623,57 @@ The transport layer uses techniques such as sliding window protocol to dynamical
 6) Congestion Control:
 Congestion control mechanisms manage network congestion by detecting and responding to congestion events.
 The transport layer monitors network traffic, adjusts transmission rates, and implements backoff strategies to alleviate congestion and maintain network stability.
+
+# Quality of service
+
+Quality of Service (QoS) refers to a set of techniques and mechanisms used to manage and prioritize network traffic to meet specific performance requirements, such as bandwidth, latency, jitter, and reliability. QoS aims to ensure that critical applications and services receive the necessary network resources and performance levels to operate effectively, even under congested or degraded network conditions.
+
+1) Service Differentiation:
+
+QoS allows network administrators to classify and prioritize different types of traffic based on their characteristics and requirements.
+Traffic can be classified into multiple classes or levels of service, each with its own QoS parameters and policies.
+
+2) Traffic Prioritization:
+QoS mechanisms prioritize critical or time-sensitive traffic over less important or delay-tolerant traffic.
+Prioritization is typically based on factors such as application type, traffic type (e.g., voice, video, data), source/destination, and service level agreements (SLAs).
+
+3) Bandwidth Allocation:
+QoS allocates and reserves network bandwidth for specific traffic classes or applications to ensure that they receive sufficient bandwidth to meet their performance requirements.
+Bandwidth allocation may be static (e.g., fixed allocation) or dynamic (e.g., bandwidth on demand) based on network conditions and traffic demands.
+
+4) Traffic Shaping and Policing:
+Traffic shaping techniques regulate the rate and timing of packet transmission to smooth out traffic flows and prevent bursts of traffic that could lead to congestion.
+Traffic policing mechanisms enforce traffic rate limits and discard or remark packets that exceed predefined thresholds to ensure fair resource allocation and prevent network abuse.
+
+5) Queue Management:
+QoS manages packet queues at network devices (e.g., routers, switches) to prioritize and schedule packet transmission based on their QoS parameters and service requirements.
+Queue management algorithms, such as weighted fair queuing (WFQ) and class-based queuing (CBQ), ensure that high-priority packets are processed ahead of lower-priority packets.
+
+# connection oriented and connection less
+
+Connection-oriented and connectionless are two communication paradigms used in networking, particularly in the transport layer, to establish and manage communication sessions between hosts.
+
+1) Connection-Oriented Communication:
+
+In a connection-oriented communication model, a logical connection is established between the sender and receiver before data transmission begins.
+The communication session follows a set of predefined steps for connection establishment, data transfer, and connection termination.
+
+Characteristics of connection-oriented communication include:
+
+* Reliability: The protocol ensures reliable delivery of data by acknowledging received packets, retransmitting lost packets, and ensuring data integrity.
+* Ordered Delivery: Data packets are delivered to the receiver in the same order they were sent, preserving the sequence of data transmission.
+* Flow Control: The protocol implements flow control mechanisms to regulate the rate of data transmission and prevent congestion.
+
+Example protocols: Transmission Control Protocol (TCP) is a prominent example of a connection-oriented protocol used in TCP/IP networks.
+
+2) Connectionless Communication:
+
+In a connectionless communication model, no explicit connection setup is required before transmitting data.
+Each data packet (datagram) is treated independently and routed based on its destination address without prior coordination between sender and receiver.
+
+Characteristics of connectionless communication include:
+
+* Unreliability: The protocol does not guarantee delivery of data or provide acknowledgment of received packets. Packet loss, duplication, and out-of-order delivery may occur.
+* No Flow Control: There are no mechanisms for flow control or congestion avoidance. Senders transmit data at their own pace, which may lead to congestion in the network.
+
+Example protocols: User Datagram Protocol (UDP) is a widely used connectionless protocol, commonly used for real-time applications where low latency is critical, such as voice and video streaming.
