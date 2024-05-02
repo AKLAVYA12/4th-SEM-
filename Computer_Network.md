@@ -1026,3 +1026,23 @@ The resulting ciphertext blocks are sent to the recipient.
 The recipient receives the ciphertext blocks and decrypts them using their private key.
 The decryption process involves raising each ciphertext block to the power of the recipient's private key modulo the same large composite number (the modulus).
 The resulting plaintext blocks are concatenated to reconstruct the original message.
+
+# Application of Security in Networks: Digital signature
+
+Digital signatures play a crucial role in network security by providing authentication, integrity, and non-repudiation for electronic documents, messages, and transactions
+
+1) uthentication: Digital signatures verify the identity of the sender and ensure that the message or document originated from the claimed sender. Each digital signature is unique to the sender's private key, providing assurance of the sender's identity to the recipient.
+
+2) Integrity: Digital signatures ensure the integrity of the transmitted data by detecting any unauthorized alterations or tampering. Any changes made to the signed document or message, even minor ones, will invalidate the signature upon verification.
+
+3) Non-Repudiation: Digital signatures provide non-repudiation, meaning the sender cannot deny sending the message or document once it has been digitally signed. The recipient can prove the authenticity of the sender's signature to third parties if disputes arise.
+
+4) Secure Transactions: Digital signatures are widely used in secure transactions, such as online banking, e-commerce, and electronic contracts. They enable parties to authenticate and sign agreements, contracts, financial transactions, and legal documents over the internet securely.
+
+5) Document Verification: Digital signatures facilitate document verification and audit trails by securely associating the signature with the signed document. Recipients can verify the validity of the signature and the integrity of the document using cryptographic verification algorithms.
+
+6) Email Security: Digital signatures are used to secure email communications and ensure the authenticity of the sender. Secure email protocols like S/MIME (Secure/Multipurpose Internet Mail Extensions) and DKIM (DomainKeys Identified Mail) use digital signatures to authenticate email messages and prevent spoofing and phishing attacks.
+
+7) Document Signing: Digital signatures replace traditional handwritten signatures for electronically signing documents, contracts, and agreements. They provide a legally binding method for signing electronic documents while maintaining security and authenticity.
+
+8) Code Signing: Digital signatures are used to sign software code and executables to verify the authenticity and integrity of the software. Code signing certificates ensure that software applications come from trusted sources and have not been tampered with or altered.
